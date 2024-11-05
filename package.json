@@ -1,0 +1,30 @@
+{
+  "name": "kasplexbuilder",
+  "version": "0.0.1",
+  "description": "A JavaScript library for Kasplex interactions",
+  "main": "./index.js",
+  "type": "commonjs",
+  "author": "KaffinPX",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GeraldoNonKYC/KasplexBuilderJS.git"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "files": [
+    "index.js",
+    "src"
+  ],
+  "keywords": [
+    "kasplex",
+    "builder",
+    "javascript",
+    "typescript",
+    "indexer"
+  ],
+  "license": "MIT"
+}
