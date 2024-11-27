@@ -3,13 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Inscription = void 0;
 const encoder = new TextEncoder();
 class Inscription {
-    data;
     constructor(operation, params) {
-        this.data = {
-            'p': 'krc-20',
-            'op': operation,
-            ...params
-        };
+        this.data = Object.assign({ 'p': 'krc-20', 'op': operation }, params);
     }
     write(builder, publicKey) {
         builder.drain();
@@ -19,7 +14,7 @@ class Inscription {
             .addOp(0) // OpFalse
             .addOp(99) // OpIf
             .addData(encoder.encode("kasplex"))
-            .addI64(0n)
+            .addI64(BigInt(0))
             .addData(encoder.encode(this.toString()))
             .addOp(104); // OpEndIf
     }

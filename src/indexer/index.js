@@ -1,10 +1,17 @@
 "use strict";
-const fetch = (typeof globalThis.fetch !== 'undefined') ? globalThis.fetch : require('node-fetch');
-
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Indexer = void 0;
 function buildFetchFunction(templateUrl) {
-    return async (params = {}) => {
+    return (...args_1) => __awaiter(this, [...args_1], void 0, function* (params = {}) {
         const url = templateUrl.replace(/{(\w+)}/g, (_, key) => {
             const value = params[key];
             if (!value)
@@ -16,15 +23,14 @@ function buildFetchFunction(templateUrl) {
             .filter(([, value]) => value !== undefined)
             .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
             .join('&');
-        const response = await fetch(`${url}?${optionalParams}`);
+        const response = yield fetch(`${url}?${optionalParams}`);
         if (!response.ok) {
             throw new Error(`Error fetching data from indexer: ${response.statusText}`);
         }
-        return await response.json();
-    };
+        return yield response.json();
+    });
 }
 class Indexer {
-    url;
     constructor(url) {
         this.url = url;
     }
